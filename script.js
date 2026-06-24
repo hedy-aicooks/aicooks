@@ -48,7 +48,7 @@ navLinksContainer.querySelectorAll('a').forEach(link => {
 // ===== ANIMATED COUNTER =====
 function animateCounter(el) {
     const target = parseInt(el.getAttribute('data-target'));
-    const duration = 2000; // ms
+    const duration = 2000;
     const startTime = performance.now();
 
     function easeOutQuart(t) {
@@ -92,29 +92,18 @@ const scrollObserver = new IntersectionObserver((entries) => {
                     animateCounter(counter);
                 }
             });
-
-            // Trigger for payback numbers
-            const paybackNumbers = entry.target.querySelectorAll('.payback-number');
-            paybackNumbers.forEach(num => {
-                if (!num.dataset.animated) {
-                    num.dataset.animated = 'true';
-                    const target = num.textContent.replace(/[^0-9.]/g, '');
-                    num.dataset.target = target;
-                    animateCounter(num);
-                }
-            });
         }
     });
 }, observerOptions);
 
 // Observe all animate-on-scroll elements
-document.querySelectorAll('.animate-on-scroll, .hero-stats, .payback-stats').forEach(el => {
+document.querySelectorAll('.fade, .hero-stats').forEach(el => {
     scrollObserver.observe(el);
 });
 
 // Also observe sections for general animation
 document.querySelectorAll('.section').forEach(section => {
-    section.classList.add('animate-on-scroll');
+    section.classList.add('fade');
     scrollObserver.observe(section);
 });
 
@@ -149,7 +138,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            const offset = 80; // navbar height
+            const offset = 80;
             const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
             window.scrollTo({
                 top: targetPosition,
@@ -160,7 +149,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===== CARD TILT EFFECT =====
-document.querySelectorAll('.component-card, .pain-card, .project-card').forEach(card => {
+document.querySelectorAll('.component-card, .solution-card, .project-card, .integration-card, .roi-card, .cert-item').forEach(card => {
     card.addEventListener('mousemove', (e) => {
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -178,6 +167,6 @@ document.querySelectorAll('.component-card, .pain-card, .project-card').forEach(
     });
 });
 
-console.log('%c AICOOKS %c Intelligent Exhaust Control System ',
+console.log('%c AICOOKS DCKV %c Demand Control Kitchen Ventilation System ',
     'background: #0F1B2D; color: #00B4D8; font-size: 14px; padding: 4px 8px; border-radius: 4px 0 0 4px; font-weight: bold;',
     'background: #00B4D8; color: #FFFFFF; font-size: 14px; padding: 4px 8px; border-radius: 0 4px 4px 0;');
